@@ -1,9 +1,25 @@
+const _Node = require("./node");
+
 class LinkedList {
   constructor() {
     this.head = null;
   }
   insertFirst(item) {
-    this.head = new _node(item, this.head);
+    this.head = new _Node(item, this.head);
+  }
+  insertBefore(item, node) {
+    if (this.head === null) {
+      this.insertFirst(item);
+    }
+    if (this.head.value === node) {
+      this.insertFirst(item);
+    }
+    let after = node;
+    let tempNode = this.head;
+    while (tempNode.next.value !== after) {
+      tempNode = tempNode.next;
+    }
+    tempNode.next = new _Node(item, after);
   }
   insertLast(item) {
     if (this.head === null) {
@@ -13,7 +29,7 @@ class LinkedList {
       while (tempNode.next !== null) {
         tempNode = tempNode.next;
       }
-      tempNode.next = new _node(item, null);
+      tempNode.next = new _Node(item, null);
     }
   }
   remove(item) {
