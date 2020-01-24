@@ -51,3 +51,5 @@ class LinkedList {
     return currNode;
   }
 }
+
+module.exports = LinkedList;
