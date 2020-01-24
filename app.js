@@ -7,6 +7,41 @@ class LinkedList {
   insertFirst(item) {
     this.head = new _Node(item, this.head);
   }
+  insertAfter(item, node) {
+    let currNode = this.head;
+    let nextNode = this.head;
+
+    if(this.head === null) {
+      this.insertFirst(item)
+    }
+    while(currNode.value !== node) {
+      currNode = currNode.next;
+      nextNode = currNode.next;
+      
+      if(currNode.next === null) {
+        console.log('Node not Found')
+        return;
+      }
+    }
+    currNode.next = new _Node(item, nextNode);
+  }
+  insertAt(item, num) {
+    let prevNode = this.head;
+    let currNode = this.head;
+    let nextNode = this.head;
+
+    while (num > 0) {
+      num--;
+      prevNode = currNode.next;
+      nextNode = currNode.next;
+
+      if(currNode.next === null && num > 0) {
+        console.log('not enough nodes');
+        return;
+      }
+    }
+    prevNode.next = new _Node(item, nextNode)
+  }
   insertBefore(item, node) {
     if (this.head === null) {
       this.insertFirst(item);

@@ -1,14 +1,20 @@
 /* eslint-disable quotes */
 /* eslint-disable no-console */
 const LinkedList = require("./app");
+let SLL = new LinkedList();
 
 function main() {
-  let SLL = new LinkedList();
-  SLL.insertFirst("Apollo");
-  SLL.insertLast("Boomer");
-  SLL.insertBefore("Boomer2", "Boomer");
+  SLL.insertFirst('Apollo');
+  SLL.insertFirst('Boomer');
+  SLL.insertFirst('Helo');
+  SLL.insertFirst('Husker');
+  SLL.insertFirst('Starbuck');
+
+  SLL.insertLast('Tauhida')
+  
 
   console.log(SLL);
+  return SLL;
 }
 
 main();
