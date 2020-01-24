@@ -7,54 +7,66 @@ class LinkedList {
   insertFirst(item) {
     this.head = new _Node(item, this.head);
   }
-  insertAfter(item, node) {
-    let currNode = this.head;
-    let nextNode = this.head;
-
-    if(this.head === null) {
-      this.insertFirst(item)
+  insertAfter(item, itemAfter) {
+    const newNode = new _Node(item, null);
+    if (!this.head) {
+      return null;
+    } else {
+      let current = this.head;
+      while (current.value !== itemAfter && current !== null) {
+        current = current.next;
+      }
+      newNode.next = current.next;
+      current.next = newNode;
     }
-    while(currNode.value !== node) {
-      currNode = currNode.next;
-      nextNode = currNode.next;
-      
-      if(currNode.next === null) {
-        console.log('Node not Found')
+  }
+  insertAt(item, index) {
+    let newNode = new _Node(item, null);
+    if (index < 0) {
+      console.log("index out of bounds");
+      return;
+    }
+    if (index === 0) {
+      newNode.next = this.head;
+      this.head = newNode;
+      return;
+    }
+    let prev = this.head;
+    let current = this.head;
+    for (let i = 0; i < index; i++) {
+      if (current === null) {
+        console.log("index out of bounds");
         return;
       }
+      prev = current;
+      current = current.next;
     }
-    currNode.next = new _Node(item, nextNode);
+    newNode.next = current;
+    prev.next = newNode;
   }
-  insertAt(item, num) {
-    let prevNode = this.head;
-    let currNode = this.head;
-    let nextNode = this.head;
-
-    while (num > 0) {
-      num--;
-      prevNode = currNode.next;
-      nextNode = currNode.next;
-
-      if(currNode.next === null && num > 0) {
-        console.log('not enough nodes');
+  insertBefore(item, itemBefore) {
+    let newNode = new _Node(item, null);
+    if (!this.head) {
+      return null;
+    }
+    if (this.head.value === itemBefore) {
+      newNode.next = this.head;
+      this.head = newNode;
+      return;
+    }
+    let current = this.head;
+    let prev = this.head;
+    while (current !== null) {
+      if (current.value === itemBefore) {
+        newNode.next = current;
+        prev.next = newNode;
         return;
       }
+      prev = current;
+      current = current.next;
     }
-    prevNode.next = new _Node(item, nextNode)
-  }
-  insertBefore(item, node) {
-    if (this.head === null) {
-      this.insertFirst(item);
-    }
-    if (this.head.value === node) {
-      this.insertFirst(item);
-    }
-    let after = node;
-    let tempNode = this.head;
-    while (tempNode.next.value !== after) {
-      tempNode = tempNode.next;
-    }
-    tempNode.next = new _Node(item, after);
+    console.log(`${itemBefore} not found`);
+    return;
   }
   insertLast(item) {
     if (this.head === null) {
